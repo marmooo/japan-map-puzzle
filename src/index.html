@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="日本地図の都道府県パズルです。">
+    <title>日本地図パズル</title>
+    <meta property="og:title" content="日本地図パズル">
+    <meta property="og:site_name" content="日本地図パズル">
+    <meta property="og:description" content="日本地図の都道府県パズルです。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marmooo.github.io/japan-map-puzzle/">
+    <meta property="og:image" content="https://marmooo.github.io/japan-map-puzzle/favicon/apple-touch-icon.png">
+    <meta name="twitter:card" content="summary">
+    <!-- <!-1- Global site tag (gtag.js) - Google Analytics -1-> -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2179JXDYY"></script> -->
+    <!-- <script> -->
+    <!--   window.dataLayer = window.dataLayer || []; -->
+    <!--   function gtag(){dataLayer.push(arguments);} -->
+    <!--   gtag('js', new Date()); -->
+    <!--   gtag('config', 'G-F2179JXDYY'); -->
+    <!-- </script> -->
+    <!-- <script> -->
+    <!--   if ('serviceWorker' in navigator) { -->
+    <!--     window.addEventListener('load', function() { -->
+    <!--       navigator.serviceWorker.register('/japan-map-puzzle/sw.js'); -->
+    <!--     }); -->
+    <!--   } -->
+    <!-- </script> -->
+    <link rel="icon" type="image/png" href="/japan-map-puzzle/favicon/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/japan-map-puzzle/favicon/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/japan-map-puzzle/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/japan-map-puzzle/favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+      #map { max-width: 100vmin; max-height: calc(100vmin - 60px); }
+      html[data-bs-theme="dark"] .navbar-brand > img { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #problem { filter: invert(1) hue-rotate(180deg); }
+    </style>
+    <!-- <script data-ad-client="ca-pub-6459713332128733" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand">
+        <div class="container flex-wrap">
+          <a class="navbar-brand" href="/japan-map-puzzle/">
+            <img alt="日本地図パズル" src="/japan-map-puzzle/favicon/favicon.svg" width="32" height="32">
+            日本地図パズル
+          </a>
+          <div class="navbar-nav">
+            <button id="startButton" class="btn btn-sm btn-primary" type="button">スタート</button>
+            <select title="コース" id="courseOption" class="form-select form-select-sm w-auto ms-1">
+              <option>Lv. 1</option>
+              <option>Lv. 2</option>
+              <option>Lv. 3</option>
+              <option>Lv. 4</option>
+              <option>Lv. 5</option>
+              <option>Lv. 6</option>
+              <option>Lv. 7</option>
+              <option>Lv. 8</option>
+              <option>Lv. 9</option>
+              <option>Lv.10</option>
+              <option>Lv.11</option>
+              <option>Lv.12</option>
+            </select>
+            <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0 ms-1" type="button">🌓</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <noscript>
+        <div class="alert alert-warning">JavaScript を ON にしてください</div>
+      </noscript>
+      <div id="problem" class="d-flex justify-content-center position-relative">
+        <object id="map" type="image/svg+xml" data="map.svg" width="1009" height="982"></object>
+        <canvas id="canvas"></canvas>
+      </div>
+    </main>
+    <footer class="pt-4 alert text-center">
+      <div>
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/japan-map-puzzle">Contact</a>
+      </div>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a></div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js" integrity="sha256-SPjwkVvrUS/H/htIwO6wdd0IA8eQ79/XXNAH+cPuoso=" crossorigin="anonymous"></script>
+    <script type="module" src="/japan-map-puzzle/index.js"></script>
+  </body>
+</html>
