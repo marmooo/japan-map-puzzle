@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A puzzle game of Japan map prefectures.">
-    <title>Japan Map Puzzle</title>
-    <meta property="og:title" content="Japan Map Puzzle">
-    <meta property="og:site_name" content="Japan Map Puzzle">
-    <meta property="og:description" content="A puzzle game of Japan map prefectures.">
+    <meta name="description" content="日本地図の都道府県パズルです。">
+    <title>日本地図パズル</title>
+    <meta property="og:title" content="日本地図パズル">
+    <meta property="og:site_name" content="日本地図パズル">
+    <meta property="og:description" content="日本地図の都道府県パズルです。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marmooo.github.io/japan-map-puzzle/">
     <meta property="og:image" content="https://marmooo.github.io/japan-map-puzzle/favicon/apple-touch-icon.png">
@@ -30,7 +30,7 @@
     <link rel="icon" type="image/png" href="/japan-map-puzzle/favicon/favicon.png">
     <link rel="icon" type="image/svg+xml" href="/japan-map-puzzle/favicon/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/japan-map-puzzle/favicon/apple-touch-icon.png">
-    <link rel="manifest" href="/japan-map-puzzle/favicon/site.webmanifest">
+    <link rel="manifest" href="/japan-map-puzzle/favicon/ja.webmanifest">
     <link rel="alternate" href="https://marmooo.github.io/japan-map-puzzle/" hreflang="x-default">
     <link rel="alternate" href="https://marmooo.github.io/japan-map-puzzle/ja/" hreflang="ja">
     <link rel="alternate" href="https://marmooo.github.io/japan-map-puzzle/en/" hreflang="en">
@@ -47,12 +47,12 @@
       <nav class="navbar navbar-expand">
         <div class="container flex-wrap">
           <a class="navbar-brand" href="/japan-map-puzzle/">
-            <img alt="Japan Map Puzzle" src="/japan-map-puzzle/favicon/favicon.svg" width="32" height="32">
-            Japan Map Puzzle
+            <img alt="日本地図パズル" src="/japan-map-puzzle/favicon/favicon.svg" width="32" height="32">
+            日本地図パズル
           </a>
           <div class="navbar-nav">
-            <button id="startButton" class="btn btn-sm btn-primary" type="button">START</button>
-            <select title="course" id="courseOption" class="form-select form-select-sm w-auto ms-1">
+            <button id="startButton" class="btn btn-sm btn-primary" type="button">スタート</button>
+            <select title="コース" id="courseOption" class="form-select form-select-sm w-auto ms-1">
               <option>Lv. 1</option>
               <option>Lv. 2</option>
               <option>Lv. 3</option>
@@ -66,18 +66,18 @@
               <option>Lv.11</option>
               <option>Lv.12</option>
             </select>
-            <select title="language" id="lang" class="form-select form-select-sm w-auto ms-1">
-              <option value="ja">日本語</option>
-              <option value="en" selected>English</option>
+            <select title="言語" id="lang" class="form-select form-select-sm w-auto ms-1">
+              <option value="ja" selected>日本語</option>
+              <option value="en">English</option>
             </select>
-            <button title="toggle dark-mode" id="toggleDarkMode" class="fs-4 btn p-0 ms-1" type="button">🌓</button>
+            <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0 ms-1" type="button">🌓</button>
           </div>
         </div>
       </nav>
     </header>
     <main class="container">
       <noscript>
-        <div class="alert alert-warning">Please turn on Javascript.</div>
+        <div class="alert alert-warning">JavaScript を ON にしてください</div>
       </noscript>
       <div id="problem" class="d-flex justify-content-center position-relative">
         <object id="map" type="image/svg+xml" data="/japan-map-puzzle/map.svg" width="1009" height="982"></object>

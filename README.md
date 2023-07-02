@@ -1,6 +1,6 @@
-# 日本地図パズル
+# japan-map-puzzle
 
-[日本地図の都道府県パズル](https://marmooo.github.io/prefectures-puzzle-ja/)です。
+[A puzzle game of Japan map prefectures](https://marmooo.github.io/japan-map-puzzle).
 
 ## Build
 

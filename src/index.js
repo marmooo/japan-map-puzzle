@@ -1,61 +1,14 @@
 import svgpath from "https://cdn.jsdelivr.net/npm/svgpath@2.6.0/+esm";
 
-const prefectureNames = [
-  "北海道",
-  "青森県",
-  "岩手県",
-  "宮城県",
-  "秋田県",
-  "山形県",
-  "福島県",
-  "茨城県",
-  "栃木県",
-  "群馬県",
-  "埼玉県",
-  "千葉県",
-  "東京都",
-  "神奈川県",
-  "新潟県",
-  "富山県",
-  "石川県",
-  "福井県",
-  "山梨県",
-  "長野県",
-  "岐阜県",
-  "静岡県",
-  "愛知県",
-  "三重県",
-  "滋賀県",
-  "京都府",
-  "大阪府",
-  "兵庫県",
-  "奈良県",
-  "和歌山県",
-  "鳥取県",
-  "島根県",
-  "岡山県",
-  "広島県",
-  "山口県",
-  "徳島県",
-  "香川県",
-  "愛媛県",
-  "高知県",
-  "福岡県",
-  "佐賀県",
-  "長崎県",
-  "熊本県",
-  "大分県",
-  "宮崎県",
-  "鹿児島県",
-  "沖縄県",
-];
+const htmlLang = document.documentElement.lang;
+const ttsLang = getTTSLang(htmlLang);
 let correctCount = 0;
 const audioContext = new AudioContext();
 const audioBufferCache = {};
-loadAudio("modified", "mp3/decision50.mp3");
-loadAudio("correct", "mp3/correct3.mp3");
-loadAudio("correctAll", "mp3/correct1.mp3");
-let japaneseVoices = [];
+loadAudio("modified", "/japan-map-puzzle/mp3/decision50.mp3");
+loadAudio("correct", "/japan-map-puzzle/mp3/correct3.mp3");
+loadAudio("correctAll", "/japan-map-puzzle/mp3/correct1.mp3");
+let ttsVoices = [];
 loadVoices();
 loadConfig();
 
@@ -125,16 +78,15 @@ function loadVoices() {
     }
   });
   allVoicesObtained.then((voices) => {
-    japaneseVoices = voices
-      .filter((voice) => voice.lang == "ja-JP");
+    ttsVoices = voices.filter((voice) => voice.lang == ttsLang);
   });
 }
 
 function speak(text) {
   speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
-  msg.voice = japaneseVoices[Math.floor(Math.random() * japaneseVoices.length)];
-  msg.lang = "en-US";
+  msg.voice = ttsVoices[Math.floor(Math.random() * ttsVoices.length)];
+  msg.lang = ttsLang;
   speechSynthesis.speak(msg);
   return msg;
 }
@@ -264,7 +216,7 @@ function checkPosition(island, rect) {
 function addPrefectureText(prefectureName) {
   clearTimeout(prefectureTimer);
   canvas.remove(prefectureText);
-  const fontSize = canvas.width / 4;
+  const fontSize = canvas.width / prefectureTextLength;
   prefectureText = new fabric.Text(prefectureName, {
     fontSize: fontSize,
     fontFamily: "serif",
@@ -569,16 +521,54 @@ function resizePieces(rect) {
   });
 }
 
+function calcPrefectureTextLength(lang, prefectureNames) {
+  const max = Math.max(...prefectureNames.map((str) => str.length));
+  switch (lang) {
+    case "ja":
+      return max;
+    case "en":
+      /* consider proportional font */
+      return Math.ceil(max / 1.5);
+  }
+}
+
+function changeLang() {
+  const langObj = document.getElementById("lang");
+  const lang = langObj.options[langObj.selectedIndex].value;
+  location.href = `/japan-map-puzzle/${lang}/`;
+}
+
+function getTTSLang(htmlLang) {
+  switch (htmlLang) {
+    case "en":
+      return "en-US";
+    case "ja":
+      return "ja-JP";
+  }
+}
+async function initPrefecturesInfo(htmlLang) {
+  const response = await fetch(`/japan-map-puzzle/data/${htmlLang}.lst`);
+  const text = await response.text();
+  prefectureNames = text.trimEnd().split("\n");
+  prefectureTextLength = calcPrefectureTextLength(htmlLang, prefectureNames);
+}
+
 const canvas = initCanvas();
 const positionThreshold = 20;
 const scaleThreshold = 0.3;
 const angleThreshold = 20;
+let prefectureNames;
 let prefectureText;
+let prefectureTextLength;
 let prefectureTimer;
 let startTime;
 let scoreText;
+
+initPrefecturesInfo(htmlLang);
+
 document.getElementById("startButton").onclick = startGame;
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
+document.getElementById("lang").onchange = changeLang;
 document.addEventListener("click", unlockAudio, {
   once: true,
   useCapture: true,

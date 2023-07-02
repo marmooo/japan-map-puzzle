@@ -1,10 +1,10 @@
 var CACHE_NAME = "2023-07-02 09:40";
 var urlsToCache = [
   "/japan-map-puzzle/",
-  "/japan-map-puzzle/en/",
+  "/japan-map-puzzle/ja/",
   "/japan-map-puzzle/index.js",
   "/japan-map-puzzle/map.svg",
-  "/japan-map-puzzle/data/en.lst",
+  "/japan-map-puzzle/data/ja.lst",
   "/japan-map-puzzle/mp3/decision50.mp3",
   "/japan-map-puzzle/mp3/correct1.mp3",
   "/japan-map-puzzle/mp3/correct3.mp3",
