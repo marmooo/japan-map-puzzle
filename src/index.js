@@ -97,11 +97,11 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function getPrefectureNode(node) {
+function getPrefectureId(node) {
   while (!node.dataset.code) {
     node = node.parentNode;
   }
-  return node;
+  return node.dataset.code;
 }
 
 function getPieceSvgFromPath(island, scale) {
@@ -167,8 +167,6 @@ function getPieceSvg(island, scale, container) {
   } else {
     node = getPieceSvgFromPolygon(island, scale);
   }
-  const prefecture = getPrefectureNode(island);
-  node.dataset.code = prefecture.dataset.code;
   node.setAttribute("fill", "black");
   node.setAttribute("opacity", "0.8");
 
@@ -368,15 +366,14 @@ function addScoreText() {
 function setCorrectPiece(island) {
   island.setAttribute("fill", "silver");
   correctCount += 1;
-  if (correctCount == 47) {
+  if (correctCount == prefectureNames.length) {
     playAudio("correctAll");
     addScoreText();
   } else {
     playAudio("correct");
   }
-  const prefecture = getPrefectureNode(island);
-  const code = parseInt(prefecture.dataset.code) - 1;
-  const prefectureName = prefectureNames[code];
+  const id = getPrefectureId(island);
+  const prefectureName = prefectureNames[id];
   addPrefectureText(prefectureName);
   speak(prefectureName);
 }
