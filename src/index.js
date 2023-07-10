@@ -101,7 +101,8 @@ function getPrefectureId(node) {
   while (!node.dataset.code) {
     node = node.parentNode;
   }
-  return node.dataset.code;
+  const code = node.dataset.code;
+  return parseInt(code) - 1;
 }
 
 function getPieceSvgFromPath(island, scale) {
