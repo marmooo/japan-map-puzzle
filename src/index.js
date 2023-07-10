@@ -573,4 +573,16 @@ globalThis.addEventListener("resize", () => {
   const map = document.getElementById("map");
   const rect = map.getBoundingClientRect();
   resizePieces(rect);
+  if (prefectureText) {
+    prefectureText.set({
+      left: canvas.width / 2,
+      top: canvas.height / 2,
+    });
+  }
+  if (scoreText) {
+    scoreText.set({
+      left: canvas.width / 2,
+      top: canvas.height / 2,
+    });
+  }
 });
