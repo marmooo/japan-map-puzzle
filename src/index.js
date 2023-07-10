@@ -160,7 +160,7 @@ function getPieceSvgFromPolygon(island, scale) {
   return svg;
 }
 
-function getPieceSvg(island, scale, container) {
+function getPieceSvg(island, scale) {
   let node;
   if (island.tagName == "path") {
     node = getPieceSvgFromPath(island, scale);
@@ -170,9 +170,8 @@ function getPieceSvg(island, scale, container) {
   node.setAttribute("fill", "black");
   node.setAttribute("opacity", "0.8");
 
-  const rect = container.getBoundingClientRect();
-  const left = getRandomInt(0, rect.width / 2);
-  const top = getRandomInt(0, rect.height / 2);
+  const left = getRandomInt(0, canvas.width / 2);
+  const top = getRandomInt(0, canvas.height / 2);
   node.style = `position:absolute; top:${top}; left:${left};`;
   return node;
 }
@@ -452,12 +451,11 @@ function shuffleSVG() {
   const map = document.getElementById("map");
   const doc = map.contentDocument;
   const scale = getSVGScale(map, doc);
-  const main = document.querySelector("main");
   const islands = doc.querySelectorAll("polygon, path");
   islands.forEach((island) => {
     if (island.classList.contains("main")) {
       island.removeAttribute("fill");
-      const svg = getPieceSvg(island, scale, main);
+      const svg = getPieceSvg(island, scale);
       setMovable(island, svg, course);
     } else {
       island.setAttribute("fill", "black");

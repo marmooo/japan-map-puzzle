@@ -36,7 +36,9 @@
     <link rel="alternate" href="https://marmooo.github.io/japan-map-puzzle/en/" hreflang="en">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-      #map { max-width: 100vmin; max-height: calc(100vmin - 60px); }
+      #problem { width:auto; height:calc(100vh - 60px); }
+      #mapContainer { max-width:100%; max-height:100%; aspect-ratio:1009/982; object-fit:contain; }
+      #map { width:100%; height:100%; }
       html[data-bs-theme="dark"] .navbar-brand > img { filter: invert(1) hue-rotate(180deg); }
       html[data-bs-theme="dark"] #problem { filter: invert(1) hue-rotate(180deg); }
     </style>
@@ -80,7 +82,9 @@
         <div class="alert alert-warning">JavaScript を ON にしてください</div>
       </noscript>
       <div id="problem" class="d-flex justify-content-center position-relative">
-        <object id="map" type="image/svg+xml" data="/japan-map-puzzle/map.svg" width="1009" height="982"></object>
+        <div id="mapContainer">
+          <object id="map" type="image/svg+xml" data="/japan-map-puzzle/map.svg" width="1009" height="982"></object>
+        </div>
         <canvas id="canvas"></canvas>
       </div>
     </main>
