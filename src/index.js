@@ -170,10 +170,6 @@ function getPieceSvg(island, scale) {
   }
   node.setAttribute("fill", "black");
   node.setAttribute("opacity", "0.8");
-
-  const left = getRandomInt(0, canvas.width / 2);
-  const top = getRandomInt(0, canvas.height / 2);
-  node.style = `position:absolute; top:${top}; left:${left};`;
   return node;
 }
 
@@ -401,6 +397,10 @@ function adjustElementPosition(element) {
 function setMovable(island, svg, course) {
   new fabric.loadSVGFromString(svg.outerHTML, (objects, options) => {
     const group = fabric.util.groupSVGElements(objects, options);
+    group.set({
+      left: getRandomInt(0, canvas.width / 2),
+      top: getRandomInt(0, canvas.height / 2),
+    });
     group.set({
       left: group.left + group.width / 2,
       top: group.top + group.height / 2,
