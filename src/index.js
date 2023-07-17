@@ -486,10 +486,11 @@ function shuffleSVG() {
 }
 
 function startGame() {
-  correctCount = 0;
-  startTime = Date.now();
+  if (!canvas) canvas = initCanvas();
   canvas.remove(scoreText);
   shuffleSVG();
+  correctCount = 0;
+  startTime = Date.now();
 }
 
 function initCanvas() {
@@ -549,10 +550,10 @@ async function initPrefecturesInfo(htmlLang) {
   prefectureTextLength = calcPrefectureTextLength(htmlLang, prefectureNames);
 }
 
-const canvas = initCanvas();
 const positionThreshold = 20;
 const scaleThreshold = 0.3;
 const angleThreshold = 20;
+let canvas;
 let prefectureNames;
 let prefectureText;
 let prefectureTextLength;
