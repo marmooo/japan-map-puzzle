@@ -502,6 +502,22 @@ function initCanvas() {
     height: rect.height,
   });
   // canvas.selection = false;
+  canvas.on("selection:created", (event) => {
+    if (event.selected.length > 1) {
+      const selection = canvas.getActiveObject();
+      selection.setControlsVisibility({
+        bl: false,
+        br: false,
+        ml: false,
+        mt: false,
+        mr: false,
+        mb: false,
+        tl: false,
+        tr: false,
+        mtr: false,
+      });
+    }
+  });
   document.getElementById("canvas").parentNode.style.position = "absolute";
   return canvas;
 }
