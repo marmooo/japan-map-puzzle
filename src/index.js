@@ -105,72 +105,54 @@ function getPrefectureId(node) {
   return parseInt(code) - 1;
 }
 
-function getPieceSvgFromPath(island, scale) {
+function getPieceSvgFromPath(island, svg, rect) {
   const svgNamespace = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(svgNamespace, "svg");
   const path = document.createElementNS(svgNamespace, "path");
   const data = svgpath(island.getAttribute("d"));
-  let left = Infinity;
-  let top = Infinity;
-  let right = -Infinity;
-  let bottom = -Infinity;
-  data.segments.forEach((datum) => {
-    const [_type, x, y] = datum;
-    if (x < left) left = x;
-    if (y < top) top = y;
-    if (right < x) right = x;
-    if (bottom < y) bottom = y;
-  });
-  const width = right - left;
-  const height = bottom - top;
-  data.translate(-left, -top);
+  const { x, y } = rect;
+  data.translate(-x, -y);
   path.setAttribute("d", data.toString());
-  svg.setAttribute("width", width * scale);
-  svg.setAttribute("height", height * scale);
-  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.appendChild(path);
   return svg;
 }
 
-function getPieceSvgFromPolygon(island, scale) {
+function getPieceSvgFromPolygon(island, svg, rect) {
   const svgNamespace = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(svgNamespace, "svg");
   const polygon = document.createElementNS(svgNamespace, "polygon");
+  const { x, y } = rect;
   const data = island.getAttribute("points").split(" ").map(Number);
-  let left = Infinity;
-  let top = Infinity;
-  let right = -Infinity;
-  let bottom = -Infinity;
-  data.forEach((x, i) => {
-    if (i % 2 == 0) {
-      if (x < left) left = x;
-      if (right < x) right = x;
-    } else {
-      if (x < top) top = x;
-      if (bottom < x) bottom = x;
-    }
-  });
-  const width = right - left;
-  const height = bottom - top;
-  const points = data.map((x, i) => (i % 2 == 0) ? x - top : x - left);
+  const points = data.map((p, i) => (i % 2 == 0) ? p - y : p - x);
   polygon.setAttribute("points", points.join(" "));
-  svg.setAttribute("width", width * scale);
-  svg.setAttribute("height", height * scale);
-  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.appendChild(polygon);
   return svg;
 }
 
+function getPieceSvgFromGroup(island, svg) {
+  const g = island.cloneNode(true);
+  svg.appendChild(g);
+  return svg;
+}
+
 function getPieceSvg(island, scale) {
-  let node;
-  if (island.tagName == "path") {
-    node = getPieceSvgFromPath(island, scale);
-  } else {
-    node = getPieceSvgFromPolygon(island, scale);
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNamespace, "svg");
+  const rect = island.getBBox();
+  const { width, height } = rect;
+  svg.setAttribute("width", width * scale);
+  svg.setAttribute("height", height * scale);
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  svg.setAttribute("fill", "black");
+  svg.setAttribute("opacity", "0.8");
+  switch (island.tagName) {
+    case "path":
+      return getPieceSvgFromPath(island, svg, rect);
+    case "polygon":
+      return getPieceSvgFromPolygon(island, svg, rect);
+    case "g":
+      return getPieceSvgFromGroup(island, svg);
+    default:
+      throw new Error("not supported");
   }
-  node.setAttribute("fill", "black");
-  node.setAttribute("opacity", "0.8");
-  return node;
 }
 
 function checkAngle(group, wrapper) {
