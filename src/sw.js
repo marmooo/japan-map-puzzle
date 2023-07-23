@@ -1,4 +1,4 @@
-var CACHE_NAME = "2023-07-22 11:40";
+var CACHE_NAME = "2023-07-23 11:00";
 var urlsToCache = [
   "/japan-map-puzzle/",
   "/japan-map-puzzle/en/",
