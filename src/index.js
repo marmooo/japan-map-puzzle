@@ -493,9 +493,18 @@ function initCanvas() {
     height: rect.height,
   });
   // canvas.selection = false;
+  canvas.on("before:selection:cleared", (event) => {
+    adjustElementPosition(event.target);
+  });
   canvas.on("selection:created", (event) => {
     if (event.selected.length > 1) {
       const selection = canvas.getActiveObject();
+      selection.set({
+        left: selection.left + selection.width / 2,
+        top: selection.top + selection.height / 2,
+        originX: "center",
+        originY: "center",
+      });
       selection.setControlsVisibility({
         bl: false,
         br: false,
