@@ -8,6 +8,10 @@
 bash build.sh
 ```
 
+## Related Projects
+
+- [USA Map Puzzle](https://marmooo.github.io/usa-map-puzzle/)
+
 ## Attribution
 
 - `src/map.svg` is cloned from
