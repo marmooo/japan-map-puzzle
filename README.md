@@ -1,6 +1,6 @@
 # japan-map-puzzle
 
-[A map puzzle of Japanese prefectures](https://marmooo.github.io/japan-map-puzzle).
+[A map puzzle of Japanese prefectures](https://marmooo.github.io/japan-map-puzzle/).
 
 ## Build
 
