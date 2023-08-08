@@ -558,6 +558,7 @@ function getTTSLang(htmlLang) {
       return "ja-JP";
   }
 }
+
 async function initPrefecturesInfo(htmlLang) {
   const response = await fetch(`/japan-map-puzzle/data/${htmlLang}.lst`);
   const text = await response.text();
