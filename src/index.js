@@ -248,8 +248,8 @@ function setMovableOption(group, course) {
         left: centerX,
         top: centerY,
         angle: Math.random() * 360,
+        selectable: false,
       });
-      group.selectable = false;
       break;
     }
     case 6:
@@ -283,24 +283,24 @@ function setMovableOption(group, course) {
         left: centerX,
         top: centerY,
         angle: Math.random() * 360,
+        selectable: false,
       });
-      group.selectable = false;
       break;
     }
   }
 }
 
 function addControlRect(group, course) {
-  const w2 = Math.pow(group.width * group.scaleX, 2);
-  const h2 = Math.pow(group.height * group.scaleY, 2);
-  const diagonalLength = Math.sqrt(w2 + h2) * 0.8;
+  group.setCoords();
+  const rect = group.getBoundingRect();
+  const rectLength = Math.max(rect.width, rect.height);
   const controlRect = new fabric.Rect({
     originX: "center",
     originY: "center",
     left: group.left,
     top: group.top,
-    width: diagonalLength,
-    height: diagonalLength,
+    width: rectLength,
+    height: rectLength,
     opacity: 0,
     selectable: false,
   });
@@ -309,8 +309,8 @@ function addControlRect(group, course) {
   const wrapper = new fabric.Group([controlRect, group], {
     originX: "center",
     originY: "center",
-    width: diagonalLength,
-    height: diagonalLength,
+    width: rectLength,
+    height: rectLength,
     opacity: group.opacity,
     transparentCorners: false,
     cornerStyle: "circle",
@@ -416,7 +416,14 @@ function setMovable(island, svg, course) {
       wrapper.on("modified", () => {
         playAudio("modified");
         group.set("angle", group.angle + wrapper.angle);
-        wrapper.set("angle", 0);
+        group.setCoords();
+        const rect = group.getBoundingRect();
+        const rectLength = Math.max(rect.width, rect.height);
+        wrapper.set({
+          angle: 0,
+          width: rectLength,
+          height: rectLength,
+        });
         adjustElementPosition(wrapper);
         if (!checkSpinnedPosition(island, wrapper, group)) return;
         if (!checkAngle(group, wrapper)) return;
@@ -539,7 +546,7 @@ function calcPrefectureTextLength(lang, prefectureNames) {
     case "ja":
       return max;
     case "en":
-      /* consider proportional font */
+      // consider proportional font
       return Math.ceil(max / 1.5);
   }
 }
