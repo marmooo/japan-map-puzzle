@@ -456,7 +456,7 @@ function shuffleSVG() {
       const svg = getPieceSvg(island, scale);
       setMovable(island, svg, course);
     } else {
-      island.setAttribute("fill", "black");
+      island.setAttribute("fill", "#ccc");
     }
   });
   const prefectures = doc.querySelectorAll(".prefecture");
