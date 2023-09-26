@@ -619,7 +619,8 @@ function initCanvas() {
   return canvas;
 }
 
-function resizePieces(rect) {
+function resizePieces() {
+  const rect = map.getBoundingClientRect();
   const scale = rect.width / canvas.getWidth();
   canvas.setDimensions({ width: rect.width, height: rect.height });
   canvas.getObjects().forEach((object) => {
@@ -686,8 +687,8 @@ document.addEventListener("click", unlockAudio, {
   useCapture: true,
 });
 globalThis.addEventListener("resize", () => {
-  const rect = map.getBoundingClientRect();
-  resizePieces(rect);
+  if (!canvas) return;
+  resizePieces();
   if (prefectureText) {
     prefectureText.set({
       left: canvas.width / 2,
