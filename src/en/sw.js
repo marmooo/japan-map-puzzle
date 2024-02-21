@@ -1,4 +1,4 @@
-const CACHE_NAME = "2023-10-29 00:20";
+const CACHE_NAME = "2024-02-21 10:00";
 const urlsToCache = [
   "/japan-map-puzzle/",
   "/japan-map-puzzle/en/",
@@ -9,7 +9,7 @@ const urlsToCache = [
   "/japan-map-puzzle/mp3/correct1.mp3",
   "/japan-map-puzzle/mp3/correct3.mp3",
   "/japan-map-puzzle/favicon/favicon.svg",
-  "https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js",
+  "https://cdn.jsdelivr.net/npm/fabric@5.3.1/dist/fabric.min.js",
   "https://cdn.jsdelivr.net/npm/svgpath@2.6.0/+esm",
 ];
 
