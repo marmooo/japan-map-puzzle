@@ -22,4 +22,4 @@ bash build.sh
   licensed under the GFDL
 - `src/favicon/favicon.svg` is created from
   [Emoji Two](https://github.com/EmojiTwo/emojitwo) licensed under the
-  Apache-2.0
+  [Apache-2.0](https://github.com/EmojiTwo/emojitwo/blob/master/LICENSE.md)
