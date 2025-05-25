@@ -43,6 +43,10 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
+  const uttr = new SpeechSynthesisUtterance("");
+  uttr.lang = ttsLang;
+  speechSynthesis.speak(uttr);
+
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -51,7 +55,7 @@ function unlockAudio() {
     loadAudio("correct", "/japan-map-puzzle/mp3/correct3.mp3");
     loadAudio("correctAll", "/japan-map-puzzle/mp3/correct1.mp3");
   }
-  document.removeEventListener("pointerdown", unlockAudio);
+  document.removeEventListener("click", unlockAudio);
   document.removeEventListener("keydown", unlockAudio);
 }
 
@@ -705,7 +709,7 @@ initPrefecturesInfo(htmlLang);
 document.getElementById("startButton").onclick = startGame;
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("lang").onchange = changeLang;
-document.addEventListener("pointerdown", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
 document.addEventListener("keydown", unlockAudio, { once: true });
 globalThis.addEventListener("resize", () => {
   if (!canvas) return;
